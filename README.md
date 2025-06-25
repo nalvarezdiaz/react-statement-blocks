@@ -21,6 +21,7 @@ pnpm add react-statement-blocks
 ## Features
 
 - Declarative conditional rendering with familiar programming constructs
+- Elegant iteration/loop components for rendering lists and collections
 - Type-safe components built with TypeScript
 - Zero dependencies besides React
 - Supports React 19+
@@ -29,7 +30,7 @@ pnpm add react-statement-blocks
 ## Usage
 
 ```tsx
-import { Condition, If, ElseIf, Else } from "react-statement-blocks";
+import { Condition, If, ElseIf, Else, For } from "react-statement-blocks";
 
 function ProfileGreeting({ user, isAdmin, isPremium }) {
   return (
@@ -48,14 +49,14 @@ function ProfileGreeting({ user, isAdmin, isPremium }) {
 }
 ```
 
-## Rules
+## Conditional Component Rules
 
 1. Every conditional block must start with an `<If>` component
 2. `<If>` can be followed by any number of `<ElseIf>` components and/or a single `<Else>` component
 3. `<Else>` must be the last component in the conditional block
-4. All components must be direct children of a `<Condition>` component
+4. All conditional components must be direct children of a `<Condition>` component
 
-## Examples
+## Conditional Component Examples
 
 ### Basic Usage
 
@@ -112,6 +113,98 @@ const user: User | null = getUser();
   </Else>
 </Condition>;
 ```
+
+## Iteration with For Component
+
+The `For` component provides a declarative way to render lists of items, with built-in support for filtering, sorting, limiting, and more.
+
+### Basic Usage
+
+```tsx
+const items = ["Apple", "Banana", "Cherry", "Date"];
+
+return (
+  <For each={items}>
+    {({ item, index }) => (
+      <li>
+        {index + 1}. {item}
+      </li>
+    )}
+  </For>
+);
+```
+
+### With Container Element
+
+```tsx
+const fruits = ["Apple", "Banana", "Cherry"];
+
+return (
+  <For each={fruits} as="ul">
+    {({ item }) => <li>{item}</li>}
+  </For>
+);
+```
+
+### With Fallback Content
+
+```tsx
+const products = []; // Empty array
+
+return (
+  <For each={products} fallback={<p>No products available.</p>}>
+    {({ item }) => <ProductCard product={item} />}
+  </For>
+);
+```
+
+### With Filtering, Sorting, and Limits
+
+```tsx
+const users = [
+  { id: 1, name: "Alice", age: 28, active: true },
+  { id: 2, name: "Bob", age: 32, active: false },
+  { id: 3, name: "Charlie", age: 24, active: true },
+  { id: 4, name: "Diana", age: 29, active: true },
+  { id: 5, name: "Evan", age: 35, active: false },
+];
+
+return (
+  <For
+    each={users}
+    filter={(user) => user.active}
+    sort={(a, b) => a.age - b.age}
+    limit={2}
+    keyBy="id"
+    as="div"
+  >
+    {({ item: user, itemKey }) => <UserCard key={itemKey} user={user} />}
+  </For>
+);
+```
+
+### For Component Props
+
+| Prop       | Type                       | Description                                            |
+| ---------- | -------------------------- | ------------------------------------------------------ |
+| `each`     | `T[] \| null \| undefined` | The array of items to iterate over                     |
+| `children` | Render function            | Function that receives `{ item, index, itemKey, all }` |
+| `as`       | JSX element                | Optional wrapper element (e.g., `"ul"`, `"div"`)       |
+| `fallback` | ReactNode                  | Content to show when array is empty or null            |
+| `keyBy`    | keyof T                    | Property to use as key for each item                   |
+| `limit`    | number                     | Maximum number of items to render                      |
+| `offset`   | number                     | Number of items to skip from the beginning             |
+| `filter`   | Function                   | Filter function `(item, index, all) => boolean`        |
+| `sort`     | Function                   | Sort function `(a, b) => number`                       |
+
+## Component Rules
+
+1. Every `For` block must have an `each` prop
+2. `each` can be an array, null, or undefined
+3. `children` must be a function that receives `{ item, index, itemKey, all }`
+4. `as` prop can be used to specify a container element
+5. `fallback` prop can be used to specify content when the array is empty
+6. `keyBy`, `limit`, `offset`, `filter`, and `sort` are optional props for advanced usage
 
 ## Contributing
 
