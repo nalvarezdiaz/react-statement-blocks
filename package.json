@@ -2,6 +2,16 @@
   "name": "react-statement-blocks",
   "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
+  "description": "declarative conditional rendering components for React applications",
+  "author": {
+    "name": "Néstor Álvarez-Díaz",
+    "email": "naddiaz.92@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nalvarezdiaz/react-statement-blocks"
+  },
   "scripts": {
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx",
