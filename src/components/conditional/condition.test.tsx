@@ -9,7 +9,7 @@ import {
   vi,
 } from "vitest";
 
-import { Condition, If, ElseIf, Else } from "./index";
+import { Condition, Else, ElseIf, If } from "./index";
 
 describe("Condition", () => {
   const ifDiv = <div data-testid="if-content" />;
@@ -93,7 +93,7 @@ describe("Condition", () => {
     let currentName;
     render(
       <Condition>
-        <If condition={user?.name}>
+        <If condition={user.name}>
           {(name) => {
             currentName = name;
             return (

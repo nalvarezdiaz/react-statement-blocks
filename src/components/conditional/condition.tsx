@@ -59,8 +59,7 @@ export const Condition: FC<{ children: ReactNode }> = ({ children }) => {
     }
 
     for (const child of currentChildren) {
-      const { condition, children: branchChildren } = child.element
-        .props as BranchProps;
+      const { condition, children: branchChildren } = child.element.props;
       const branchType = child.type;
 
       if (branchType === "If" || branchType === "ElseIf") {
@@ -73,7 +72,7 @@ export const Condition: FC<{ children: ReactNode }> = ({ children }) => {
             </>
           );
         }
-      } else if (branchType === "Else") {
+      } else {
         return <>{branchChildren}</>;
       }
     }
