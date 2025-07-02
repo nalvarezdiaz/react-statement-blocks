@@ -1,6 +1,6 @@
 {
   "name": "react-statement-blocks",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "type": "module",
   "license": "MIT",
   "description": "declarative conditional rendering components for React applications",
@@ -44,6 +44,10 @@
     "./conditional/ifelse": {
       "types": "./dist/conditional/ifelse.d.ts",
       "import": "./dist/conditional/ifelse.js"
+    },
+    "./conditional/switch": {
+      "types": "./dist/conditional/switch.d.ts",
+      "import": "./dist/conditional/switch.js"
     }
   },
   "files": [

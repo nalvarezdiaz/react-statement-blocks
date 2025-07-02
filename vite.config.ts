@@ -39,6 +39,10 @@ export default defineConfig({
           __dirname,
           "src/components/conditional/ifelse/index.ts"
         ),
+        "conditional/switch": resolve(
+          __dirname,
+          "src/components/conditional/switch/index.ts"
+        ),
       },
       formats: ["es"],
     },
