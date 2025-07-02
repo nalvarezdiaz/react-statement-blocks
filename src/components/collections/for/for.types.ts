@@ -1,12 +1,6 @@
-import {
-  type ComponentType,
-  Fragment,
-  type JSX,
-  type ReactNode,
-  useMemo,
-} from "react";
+import type { ComponentType, JSX, ReactNode } from "react";
 
-interface ForProps<T> {
+export interface ForProps<T> {
   /**
    * List of items to iterate over.
    */
@@ -59,62 +53,3 @@ interface ForProps<T> {
    */
   sort?: (a: T, b: T) => number;
 }
-
-export const For = <T,>({
-  each,
-  children: Child,
-  fallback,
-  as,
-  keyBy,
-  limit,
-  offset,
-  filter,
-  sort,
-}: ForProps<T>) => {
-  const items = useMemo(() => {
-    if (!each || each.length === 0) {
-      return [];
-    }
-
-    let filteredItems = each;
-
-    if (filter) {
-      filteredItems = filteredItems.filter((item, index) =>
-        filter(item, index, each)
-      );
-    }
-
-    if (offset !== undefined) {
-      filteredItems = filteredItems.slice(offset);
-    }
-
-    if (limit !== undefined) {
-      filteredItems = filteredItems.slice(0, limit);
-    }
-
-    if (sort) {
-      filteredItems = [...filteredItems].sort(sort);
-    }
-
-    return filteredItems;
-  }, [each, filter, limit, offset, sort]);
-
-  if (items.length === 0) {
-    return <>{fallback}</>;
-  }
-
-  const Wrapper = as ?? Fragment;
-  return (
-    <Wrapper>
-      {items.map((item, index) => {
-        const key =
-          keyBy && item[keyBy] ? String(item[keyBy]) : `item-${index}`;
-        return (
-          <Fragment key={key}>
-            <Child itemKey={key} item={item} index={index} all={items} />
-          </Fragment>
-        );
-      })}
-    </Wrapper>
-  );
-};

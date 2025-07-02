@@ -1,6 +1,6 @@
 {
   "name": "react-statement-blocks",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "license": "MIT",
   "description": "declarative conditional rendering components for React applications",
@@ -22,12 +22,33 @@
     "test:coverage": "vitest run --coverage",
     "prepublishOnly": "vitest run && npm run build"
   },
-  "module": "./dist/main.js",
-  "exports": "./dist/main.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./collections": {
+      "types": "./dist/collections.d.ts",
+      "import": "./dist/collections.js"
+    },
+    "./conditional": {
+      "types": "./dist/conditional.d.ts",
+      "import": "./dist/conditional.js"
+    },
+    "./collections/for": {
+      "types": "./dist/collections/for.d.ts",
+      "import": "./dist/collections/for.js"
+    },
+    "./conditional/ifelse": {
+      "types": "./dist/conditional/ifelse.d.ts",
+      "import": "./dist/conditional/ifelse.js"
+    }
+  },
   "files": [
     "dist"
   ],
-  "types": "./dist/main.d.ts",
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -48,7 +69,6 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-react-x": "^1.49.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "glob": "11.0.1",
     "globals": "16.0.0",
     "jsdom": "26.0.0",
     "prettier": "^3.6.0",
