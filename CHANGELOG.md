@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - 2025-07-03
+
+### Fixed
+
+- Fixed Switch memoization issue to evaluate `value` and `is` changes
+
 ## [0.3.0] - 2025-07-02
 
 ### Added

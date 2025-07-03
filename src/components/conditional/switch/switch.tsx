@@ -120,6 +120,12 @@ const SwitchBase = <T,>({
 };
 
 export const Switch = memo(SwitchBase, (prev, next) => {
+  if (prev.value !== next.value) {
+    return false;
+  }
+  if (prev.is !== next.is) {
+    return false;
+  }
   if (prev.children === next.children) {
     return true;
   }
