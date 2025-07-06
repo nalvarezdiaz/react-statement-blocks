@@ -63,6 +63,7 @@ export default defineConfig({
     setupFiles: "./src/test/setup.ts",
     coverage: {
       include: ["src/components"],
+      reporter: ["text", "json", "json-summary", "html"],
     },
   },
 });
